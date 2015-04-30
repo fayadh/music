@@ -13,7 +13,7 @@ var dorianMode = ['W', 'H', 'W', 'W', 'W', 'H', 'W'];
 
 function scaleFinder(scale) {
 	var i = 0;
-	var j = -1;
+	var j = 0;
 	var result = [];
 	while(i < scale.length) {
 		if (scale[i] == 'W') {
@@ -29,19 +29,33 @@ function scaleFinder(scale) {
 	return result;
 };
 
-function scaleToNotes(scale) {
+function scaleIndexToNotes(scale) {
  result = [];
  for(var i = 0; i < scale.length; i++) {
- 	result[i] = notes[scale[i]]; 
+ 	var index = scale[i] - 1;
+
+ 	if (scale[i] <= 11) {
+ 		var octave = 1; 
+ 	} else {
+ 		var octave = scale[i] % 11;  
+ 	};
+
+ 	result[i] = notes[ index ] + octave;  //to correct the notes.
  }
  return result;
 } 
 
+// // Now what we want is if the loop hits something after 11,
+// it automatically 	
 
+// Math.floor() <-- Gives us the octave.
+// % gives us the index. 
+
+// First, let's give it octaves. 
 
 $( document ).ready(function() {
 			console.log( scaleFinder(majorScale) );
-        console.log( scaleToNotes(scaleFinder(majorScale)) );
+      console.log( scaleIndexToNotes(scaleFinder(majorScale)) );
     });
 
 // scaleFinder(majorScale);
