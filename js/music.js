@@ -29,19 +29,23 @@ function scaleFinder(scale) {
 	return result;
 };
 
-function scaleIndexToNotes(scale) {
+function scaleIndexToNotes(indexScale) {
  result = [];
- for(var i = 0; i < scale.length; i++) {
- 	var index = scale[i] - 1;
+ for(var i = 0; i < indexScale.length; i++) {
+ 	var index = indexScale[i] - 1;
 
- 	if (scale[i] <= 11) {
- 		var octave = 1; 
+ 	// Octave recognition.
+ 	if (indexScale[i] <= 11) {
+ 		var octave = 0; 
+ 		result[i] = notes[ index ] + octave; 
  	} else {
- 		var octave = scale[i] % 11;  
+ 		var correction = (indexScale[i]) % 11;
+ 		var octave = Math.floor( (indexScale[i]) / 11) 
+ 		result[i] = notes[ correction ] + octave; //to correct the notes.
  	};
-
- 	result[i] = notes[ index ] + octave;  //to correct the notes.
+  
  }
+
  return result;
 } 
 
@@ -62,15 +66,6 @@ $( document ).ready(function() {
 
 // [1,2,3,4,5,6,7,8,9,10,11]
 // [12,13,14,15,16,17,18,19,20,21]
-
-// If we are going to have a scaleToNotes function, then 
-// we are going to need to have it loop over the possible notes.
-// how do we know which position each is in? 
-
-// function takes in array.
-// Iterate through the array. 
-
-// if H, do plus 1 
-// if W, do plus 2.
+// if scale
 
 
